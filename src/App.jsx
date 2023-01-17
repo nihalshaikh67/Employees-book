@@ -1,12 +1,11 @@
 import "./App.css";
-import CustomizedDialogs from "./components/employeeModal";
+import AddTeamAndEmployee from "./components/modals/AddTeamAndEmployeeModal";
 import { useStateContext } from "./context/StateContext";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 function App() {
   const { employeesBook } = useStateContext();
-  console.log(employeesBook,'yess')
   return (
     <div className="App">
       <div className="employee_container">
@@ -46,7 +45,7 @@ function App() {
             minWidth: "100%",
           }}
         >
-          <CustomizedDialogs />
+          <AddTeamAndEmployee />
         </div>
       </div>
     </div>

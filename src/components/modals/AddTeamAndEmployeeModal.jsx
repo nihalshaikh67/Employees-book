@@ -13,9 +13,9 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useStateContext } from "../context/StateContext";
+import { useStateContext } from "../../context/StateContext";
 import { toast } from "react-hot-toast";
-import AutocompleteDropdown from "./employeesAutoComplete";
+import AutocompleteDropdown from "../dropdowns/employeesAutoComplete";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -54,7 +54,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs() {
+export default function AddTeamAndEmployee() {
   const {
     AddNewTeam,
     setNewTeam,
@@ -174,11 +174,11 @@ export default function CustomizedDialogs() {
               Add Employee
             </Button>
           </div>
-
           {/* </Typography> */}
-          <Typography gutterBottom>
+          <p style={{ maringTop: "20px" }}>
+            {" "}
             Note - Please select team while adding the new Employee
-          </Typography>
+          </p>
         </DialogContent>
       </BootstrapDialog>
     </div>
