@@ -4,7 +4,10 @@ import { data } from "../constants/data";
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
-  const [employeesBook, setEmployeesBook] = useState(data);
+  const [employeesBook, setEmployeesBook] = useState(() => {
+    const localData = localStorage.getItem("employeesBook");
+    return localData ? JSON.parse(localData) : data;
+  });
   const [team, setTeam] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
   const [employeesList, setEmployeesList] = useState([]);
@@ -13,6 +16,7 @@ export const StateContext = ({ children }) => {
 
   useEffect(() => {
     setTeam(employeesBook.map((item) => item.team));
+    localStorage.setItem("employeesBook", JSON.stringify(employeesBook));
   }, [employeesBook]);
 
   const AddNewTeam = () => {

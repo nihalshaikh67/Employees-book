@@ -16,7 +16,6 @@ import Select from "@mui/material/Select";
 import { useStateContext } from "../context/StateContext";
 import { toast } from "react-hot-toast";
 import AutocompleteDropdown from "./employeesAutoComplete";
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -117,7 +116,9 @@ export default function CustomizedDialogs() {
               label="New Team"
               variant="outlined"
               value={newTeam}
-              onChange={(e) => setNewTeam(e.target.value)}
+              onChange={(e) => {
+                setNewTeam(e.target.value);
+              }}
             />
             <Typography>
               <Button
@@ -162,30 +163,17 @@ export default function CustomizedDialogs() {
             </Select>
           </FormControl>
           <div>
-            {/* <TextField
-              id="standard-basic"
-              style={{
-                marignLeft: "30px",
-                marginTop: "30px",
-              }}
-              value={newEmployee}
-              label="Employee name"
-              variant="outlined"
-              onChange={(e) => setNewEmployee(e.target.value)}
-            /> */}
             <AutocompleteDropdown />
+            <Button
+              style={{
+                marginTop: "20px",
+              }}
+              variant="contained"
+              onClick={handleAddEmployee}
+            >
+              Add Employee
+            </Button>
           </div>
-          {/* <div> */}
-          <Button
-            style={{
-              marginTop: "20px",
-            }}
-            variant="contained"
-            onClick={handleAddEmployee}
-          >
-            Add Employee
-          </Button>
-          {/* </div> */}
 
           {/* </Typography> */}
           <Typography gutterBottom>

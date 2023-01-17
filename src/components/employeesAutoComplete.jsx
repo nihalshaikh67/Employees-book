@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useStateContext } from "../context/StateContext";
 import TextField from "@mui/material/TextField";
 const AutocompleteDropdown = () => {
@@ -8,29 +8,35 @@ const AutocompleteDropdown = () => {
   const [inputValue, setInputValue] = useState("");
   const [filteredOptions, setFilteredOptions] = useState(employeesList);
   const [showDropdown, setShowDropDown] = useState(false);
-  console.log(filteredOptions, "mihir");
-  const handleInputChange = (event) => {
-    const inputValue = event.target.value;
-    setNewEmployee(inputValue);
-    setShowDropDown(true);
-    setFilteredOptions(
-      options.filter((option) =>
-        option.toLowerCase().startsWith(inputValue.toLowerCase())
-      )
-    );
-  };
+
+  const handleInputChange = useCallback(
+    (event) => {
+      const inputValue = event.target.value;
+      setNewEmployee(inputValue);
+      setShowDropDown(true);
+      setFilteredOptions(
+        options.filter((option) =>
+          option.toLowerCase().startsWith(inputValue.toLowerCase())
+        )
+      );
+    },
+    [options, setNewEmployee]
+  );
   useEffect(() => {
     setFilteredOptions(employeesList);
     setOptions(employeesList);
   }, [employeesList]);
 
-  useEffect(() => {
-    setFilteredOptions(
+  const filteredOptionsUpdate = useMemo(
+    () =>
       options?.filter((option) =>
         option?.toLowerCase().startsWith(inputValue.toLowerCase())
-      )
-    );
-  }, [options, inputValue]);
+      ),
+    [options, inputValue]
+  );
+  useEffect(() => {
+    setFilteredOptions(filteredOptionsUpdate);
+  }, [filteredOptionsUpdate]);
 
   const handleOptionSelect = (option) => {
     setNewEmployee(option);
