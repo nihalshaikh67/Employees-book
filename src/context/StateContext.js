@@ -7,7 +7,7 @@ export const StateContext = ({ children }) => {
   const [employeesBook, setEmployeesBook] = useState(data);
   const [team, setTeam] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
-  //   const [employeesList, setEmployeesList] = useState([]);
+  const [employeesList, setEmployeesList] = useState([]);
   const [newTeam, setNewTeam] = useState("");
   const [newEmployee, setNewEmployee] = useState("");
 
@@ -53,7 +53,9 @@ export const StateContext = ({ children }) => {
         setNewEmployee,
         AddNewTeam,
         selectedTeam,
+        employeesList,
         setSelectedTeam,
+        setEmployeesList,
         AddEmployeeToExistingTeam,
       }}
     >

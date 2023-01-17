@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 
 function App() {
   const { employeesBook } = useStateContext();
-
+  console.log(employeesBook,'yess')
   return (
     <div className="App">
       <div className="employee_container">

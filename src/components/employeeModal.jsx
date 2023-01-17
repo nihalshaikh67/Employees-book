@@ -15,6 +15,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useStateContext } from "../context/StateContext";
 import { toast } from "react-hot-toast";
+import AutocompleteDropdown from "./employeesAutoComplete";
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -63,6 +65,8 @@ export default function CustomizedDialogs() {
     setNewEmployee,
     selectedTeam,
     setSelectedTeam,
+    setEmployeesList,
+    employeesBook,
     AddEmployeeToExistingTeam,
   } = useStateContext();
   const [open, setOpen] = React.useState(false);
@@ -75,6 +79,7 @@ export default function CustomizedDialogs() {
     setNewEmployee("");
     setNewTeam("");
     setSelectedTeam("");
+    setEmployeesList([]);
   };
 
   function handleAddEmployee() {
@@ -143,7 +148,13 @@ export default function CustomizedDialogs() {
             <Select
               value={selectedTeam}
               label="team"
-              onChange={(e) => setSelectedTeam(e.target.value)}
+              onChange={(e) => {
+                setSelectedTeam(e.target.value);
+                setEmployeesList(
+                  employeesBook.find((item) => item.team === e.target.value)
+                    .employees
+                );
+              }}
             >
               {team.map((team) => {
                 return <MenuItem value={team}>{team}</MenuItem>;
@@ -151,7 +162,7 @@ export default function CustomizedDialogs() {
             </Select>
           </FormControl>
           <div>
-            <TextField
+            {/* <TextField
               id="standard-basic"
               style={{
                 marignLeft: "30px",
@@ -161,19 +172,20 @@ export default function CustomizedDialogs() {
               label="Employee name"
               variant="outlined"
               onChange={(e) => setNewEmployee(e.target.value)}
-            />
+            /> */}
+            <AutocompleteDropdown />
           </div>
-          <div>
-            <Button
-              style={{
-                marginTop: "20px",
-              }}
-              variant="contained"
-              onClick={handleAddEmployee}
-            >
-              Add Employee
-            </Button>
-          </div>
+          {/* <div> */}
+          <Button
+            style={{
+              marginTop: "20px",
+            }}
+            variant="contained"
+            onClick={handleAddEmployee}
+          >
+            Add Employee
+          </Button>
+          {/* </div> */}
 
           {/* </Typography> */}
           <Typography gutterBottom>
